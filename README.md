@@ -1,19 +1,12 @@
-# LabApp Demo (replace with your project name)
+# Compete Demo
 
-LabApp Demo is a project that demonstrates some rails concepts that may be
-useful for all CS290 students in their projects. This project will be built-up
-throughout the quarter to provide more examples for the various CS290 projects.
+We like to compete. This readme will be updated with information on how we compete.
 
-This section of the README should provide a general overview of the team's
-project.
+[PivotalTracker](https://www.pivotaltracker.com/s/projects/1193858)
 
-[PivotalTracker](https://www.pivotaltracker.com/n/projects/1192928) (replace
-with your project link)
+## TEAM COMPETE
 
-## DEMO TEAM (replace with your team name)
-
-Andrew Mutz ([@amutz](https://github.com/amutz))  
-![amutz photo](https://avatars3.githubusercontent.com/u/919763?v=2&s=120)
+Eirik Klevstad ([@klevstad](https://github.com/klevstad))
 
 
 Bryce Boe ([@bboe](https://github.com/bboe/))  
