@@ -11,3 +11,6 @@ Eirik Klevstad ([@klevstad](https://github.com/klevstad))
 
 Alexander Svae ([@svae](https://github.com/svae)
 ![svae photo](https://avatars2.githubusercontent.com/u/2511323?v=2&s=120)
+
+Eirik Fosser ([@eirifoss](https://github.com/eirifoss))
+![eirifoss photo](https://avatars1.githubusercontent.com/u/3796810?v=2&u=9b1fb69e3decce5e9f13126bba2118aacfeb1d3c&s=140)
