@@ -17,3 +17,6 @@ Alexander Svae ([@svae](https://github.com/svae))
 Eirik Fosser ([@eirifoss](https://github.com/eirifoss))
 
 ![eirifoss photo](https://avatars1.githubusercontent.com/u/3796810?v=2&u=9b1fb69e3decce5e9f13126bba2118aacfeb1d3c&s=120)
+
+Jonas Toreskaas ([@jonaslto](https://github.com/jonaslto))
+![jonaslto photo](https://avatars3.githubusercontent.com/u/3806972?v=2&u=22737fdc5be20e81903e5eaad274a4b510e89ade&s=120)
