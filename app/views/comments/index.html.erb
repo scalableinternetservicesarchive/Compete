@@ -1,0 +1,27 @@
+<h1>Listing comments</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Message</th>
+      <th>Challenge</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.message %></td>
+        <td><%= comment.challenge.name if comment.challenge %></td>
+        <td><%= link_to 'Show', comment, class: 'btn btn-primary btn-xs' %>
+        <%= link_to 'Edit', edit_comment_path(comment), class: 'btn btn-info btn-xs' %>
+        <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comment', new_comment_path %>
