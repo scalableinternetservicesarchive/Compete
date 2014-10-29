@@ -1,0 +1,28 @@
+<%= form_for(@progress) do |f| %>
+  <% if @progress.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@progress.errors.count, "error") %> prohibited this progress from being saved:</h2>
+
+      <ul>
+      <% @progress.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :gain %><br>
+    <%= f.text_field :gain %>
+  </div>
+  <!--
+  <div class="field">
+    <%= f.label :challenge_id %><br>
+    <%= f.text_field :challenge_id %>
+  </div>
+  -->
+  <%= f.hidden_field :challenge_id, :value => params[:challenge_id] %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
