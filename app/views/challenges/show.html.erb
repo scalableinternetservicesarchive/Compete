@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-8">
 		<div class="panel panel-primary">
 		  <div class="panel-heading">
 		    <h2 class="panel-title"><%= @challenge.name %> </h2>
@@ -9,15 +9,34 @@
 		  <div class="panel-body">
 		    <%= @challenge.description %>
 		  </div>
+
 		</div>
+		<%= link_to 'Edit', edit_challenge_path(@challenge) %> |
+		<%= link_to 'Back', challenges_path %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-4">
+		<h3>Comments</h3>
+		<%= render @challenge.root_comments %>
+		<%= link_to 'Add Comment', new_comment_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>
+	</div>
+
+	<div class="col-md-4">
+		<h3>Progresses</h3>
+		<%= render @challenge.root_progresses %>
+		<%= link_to 'Add Progress', new_progress_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>
+		
 	</div>
 </div>
 
 
-<%= link_to 'Add Comment', new_comment_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>
-<%= link_to 'Edit', edit_challenge_path(@challenge) %> |
-<%= link_to 'Back', challenges_path %>
 
 
-<%= render @challenge.root_comments %>
+
+
+
+
+
 

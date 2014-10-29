@@ -15,6 +15,8 @@
         <td><%= challenge.name %></td>
         <td><%= challenge.description %></td>
         <td><%= link_to 'Add Comment', new_comment_path(:challenge_id => challenge.id), class: 'btn btn-primary btn-xs' %>
+        <td><%= link_to 'Add Progress', new_progress_path(:challenge_id => challenge.id), class: 'btn btn-primary btn-xs' %>
+
         <td><%= link_to 'Show', challenge, class: 'btn btn-primary btn-xs' %>
         <%= link_to 'Edit', edit_challenge_path(challenge), class: 'btn btn-info btn-xs'  %>
         <%= link_to 'Destroy', challenge, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs'  %></td>
