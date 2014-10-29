@@ -6,8 +6,8 @@ class Challenge < ActiveRecord::Base
                       :minimum => 4
 
   def root_comments
+
   	comments
   end
 
-  
 end
