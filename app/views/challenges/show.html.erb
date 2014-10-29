@@ -14,9 +14,10 @@
 </div>
 
 
-
+<%= link_to 'Add Comment', new_comment_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>
 <%= link_to 'Edit', edit_challenge_path(@challenge) %> |
 <%= link_to 'Back', challenges_path %>
+
 
 <%= render @challenge.root_comments %>
 
