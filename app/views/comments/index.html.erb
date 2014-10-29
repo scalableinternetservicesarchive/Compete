@@ -13,7 +13,7 @@
     <% @comments.each do |comment| %>
       <tr>
         <td><%= comment.message %></td>
-        <td><%= comment.challenge.name if comment.challenge %></td>
+        <td><%= link_to(comment.challenge.name, comment.challenge) if comment.challenge %></td>
         <td><%= link_to 'Show', comment, class: 'btn btn-primary btn-xs' %>
         <%= link_to 'Edit', edit_comment_path(comment), class: 'btn btn-info btn-xs' %>
         <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %></td>
