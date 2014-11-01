@@ -28,7 +28,8 @@ class ProgressesController < ApplicationController
 
     respond_to do |format|
       if @progress.save
-        format.html { redirect_to @progress, notice: 'Progress was successfully created.' }
+        @challenge = Challenge.find(progress_params[:challenge_id])
+        format.html { redirect_to @challenge, notice: 'Progress was successfully created.' }
         format.json { render :show, status: :created, location: @progress }
       else
         format.html { render :new }
