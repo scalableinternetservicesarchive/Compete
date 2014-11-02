@@ -43,7 +43,8 @@ class ProgressesController < ApplicationController
   def update
     respond_to do |format|
       if @progress.update(progress_params)
-        format.html { redirect_to @progress, notice: 'Progress was successfully updated.' }
+        @challenge = Challenge.find(progress_params[:challenge_id])
+        format.html { redirect_to @challenge, notice: 'Progress was successfully updated.' }
         format.json { render :show, status: :ok, location: @progress }
       else
         format.html { render :edit }
@@ -57,7 +58,7 @@ class ProgressesController < ApplicationController
   def destroy
     @progress.destroy
     respond_to do |format|
-      format.html { redirect_to progresses_url, notice: 'Progress was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Progress was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

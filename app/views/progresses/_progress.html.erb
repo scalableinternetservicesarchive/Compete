@@ -1,3 +1,9 @@
+<%= link_to edit_progress_path(progress, :challenge_id => @challenge.id), class: 'btn btn-xs' do %>
+<i class="glyphicon glyphicon-edit"></i>
+<% end %>
+<%= link_to progress, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs' do %>
+<i class="glyphicon glyphicon-remove"></i>
+<% end %>
 <div class="well well-sm">
     <div>
         <%= progress.gain %>
