@@ -24,11 +24,15 @@ class ChallengesController < ApplicationController
   # POST /challenges
   # POST /challenges.json
   def create
-    date = Date::civil(params[:challenge]['start(1i)'].to_i,
+    start = Date::civil(params[:challenge]['start(1i)'].to_i,
                 params[:challenge]['start(2i)'].to_i,
                 params[:challenge]['start(3i)'].to_i)
+    stop = Date::civil(params[:challenge]['stop(1i)'].to_i,
+                       params[:challenge]['stop(2i)'].to_i,
+                       params[:challenge]['stop(3i)'].to_i)
     @challenge = Challenge.new(challenge_params)
-    @challenge.start = date
+    @challenge.start = start
+    @challenge.stop = stop
     respond_to do |format|
       if @challenge.save
         format.html { redirect_to @challenge, notice: 'Challenge was successfully created.' }
