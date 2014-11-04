@@ -5,6 +5,7 @@ class Challenge < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_length_of :name,
                       :minimum => 4
+  validates :start, presence: true
 
   def root_comments
 

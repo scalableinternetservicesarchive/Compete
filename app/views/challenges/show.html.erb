@@ -9,7 +9,9 @@
 		  <div class="panel-body">
 		    <%= @challenge.description %>
 		  </div>
-
+          <div class="panel-footer">
+            Start date: <%= @challenge.start %>
+          </div>
 		</div>
 		<%= link_to 'Edit', edit_challenge_path(@challenge) %> |
 		<%= link_to 'Back', challenges_path %>
