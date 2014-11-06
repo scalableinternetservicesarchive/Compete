@@ -10,6 +10,11 @@ class ChallengesController < ApplicationController
   # GET /challenges/1
   # GET /challenges/1.json
   def show
+
+    def sportname
+      sports[sport]
+    end
+
   end
 
   # GET /challenges/new
@@ -24,15 +29,13 @@ class ChallengesController < ApplicationController
   # POST /challenges
   # POST /challenges.json
   def create
-    start = Date::civil(params[:challenge]['start(1i)'].to_i,
-                params[:challenge]['start(2i)'].to_i,
-                params[:challenge]['start(3i)'].to_i)
-    stop = Date::civil(params[:challenge]['stop(1i)'].to_i,
-                       params[:challenge]['stop(2i)'].to_i,
-                       params[:challenge]['stop(3i)'].to_i)
     @challenge = Challenge.new(challenge_params)
-    @challenge.start = start
-    @challenge.stop = stop
+    @challenge.start = Date::civil(params[:challenge]['start(1i)'].to_i,
+                                   params[:challenge]['start(2i)'].to_i,
+                                   params[:challenge]['start(3i)'].to_i)
+    @challenge.stop = Date::civil(params[:challenge]['stop(1i)'].to_i,
+                                  params[:challenge]['stop(2i)'].to_i,
+                                  params[:challenge]['stop(3i)'].to_i)
     respond_to do |format|
       if @challenge.save
         format.html { redirect_to @challenge, notice: 'Challenge was successfully created.' }
@@ -47,6 +50,14 @@ class ChallengesController < ApplicationController
   # PATCH/PUT /challenges/1
   # PATCH/PUT /challenges/1.json
   def update
+    @challenge.start = Date::civil(params[:challenge]['start(1i)'].to_i,
+                                   params[:challenge]['start(2i)'].to_i,
+                                   params[:challenge]['start(3i)'].to_i)
+    @challenge.stop = Date::civil(params[:challenge]['stop(1i)'].to_i,
+                                  params[:challenge]['stop(2i)'].to_i,
+                                  params[:challenge]['stop(3i)'].to_i)
+    @challenge.distance = params[:challenge]['distance']
+
     respond_to do |format|
       if @challenge.update(challenge_params)
         format.html { redirect_to @challenge, notice: 'Challenge was successfully updated.' }
@@ -76,6 +87,6 @@ class ChallengesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def challenge_params
-      params.require(:challenge).permit(:name, :description)
+      params.require(:challenge).permit(:name, :description, :sport, :distance)
     end
 end

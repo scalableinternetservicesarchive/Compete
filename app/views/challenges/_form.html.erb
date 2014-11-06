@@ -20,6 +20,14 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
+    <%= f.label :sport %><br>
+    <%= f.select :sport, options_for_select(Challenge.sports) %>
+  </div>
+  <div class="field">
+    <%= f.label :distance %><br>
+    <%= f.number_field :distance %>
+  </div>
+  <div class="field">
     <%= f.label "Start date:" %><br>
     <%= f.date_select :start %>
   </div>

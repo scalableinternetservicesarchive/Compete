@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104021831) do
+ActiveRecord::Schema.define(version: 20141105233357) do
 
   create_table "challenges", force: true do |t|
     t.string   "name"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20141104021831) do
     t.text     "description"
     t.date     "start"
     t.date     "stop"
+    t.integer  "sport"
+    t.integer  "distance"
   end
 
   create_table "comments", force: true do |t|

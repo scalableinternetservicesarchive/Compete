@@ -1,4 +1,5 @@
 class Challenge < ActiveRecord::Base
+  enum sports: [:Swimming, :Running]
   has_many :comments
   has_many :progresses
   validates :name, presence: true, format: { with: /\A[a-zA-Z0-9 ]+\z/, message: "only allows letters and numbers"}
@@ -7,6 +8,7 @@ class Challenge < ActiveRecord::Base
                       :minimum => 4
 
   validate :check_dates
+
 
   def check_dates
     if self.start.present? && self.start < Date.today
@@ -25,6 +27,5 @@ class Challenge < ActiveRecord::Base
   def root_progresses
   	progresses
   end
-
 
 end
