@@ -2,7 +2,7 @@ class Challenge < ActiveRecord::Base
   enum sports: [:Swimming, :Running]
   has_many :comments
   has_many :progresses
-  validates :name, presence: true, format: { with: /\A[a-zA-Z0-9 ]+\z/, message: "only allows letters and numbers"}
+  validates :name, presence: true
   validates_uniqueness_of :name
   validates_length_of :name,
                       :minimum => 4
@@ -12,7 +12,7 @@ class Challenge < ActiveRecord::Base
 
   def check_dates
     if self.start.present? && self.start < Date.today
-      errors.add(:start, "can nots be in the past")
+      errors.add(:start, "can not be in the past")
     end
     if self.stop.present? && self.stop < self.start
       errors.add(:stop, "can not be before end date")
