@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <div class="row">
 	<div class="col-md-8">
@@ -14,19 +14,33 @@
 
             </div>
             <div class="col-md-2">
-                Sport: <%= Challenge.sports.key(@challenge.sport) %>
+                Sport: <%= Challenge.sports.key(@challenge.sport) %> 
                 Distance: <%= @challenge.distance %>
             </div>
           </div>
         </div>
 
           <div class="panel-footer">
-            Start date: <%= @challenge.start %>
-            End date: <%= @challenge.stop %>
-          </div>
+            <div class="progress">
+            	<% totalTime = (@challenge.stop - @challenge.start).to_i
+            		timeelapsed = (Date.today - @challenge.start).to_i
+            		
+            		if timeelapsed <= 0
+            			timeProgress = 0
+            		else 
+            			timeProgress = (((1.0*timeelapsed)/totalTime)*100).to_i
+            		end
+            	%>
+
+	  			<div class="progress-bar" role="progressbar" aria-valuenow="<%= timeProgress %>" aria-valuemin="0" aria-valuemax="100" style="width:<%= timeProgress %>%">
+	    			<%= timeProgress %>%
+	  			</div>
+			</div>
+         </div>
 		</div>
 		<%= link_to 'Edit', edit_challenge_path(@challenge) %> |
 		<%= link_to 'Back', challenges_path %>
+		
 	</div>
 </div>
 
@@ -40,8 +54,7 @@
 	<div class="col-md-4">
 		<h3>Progresses</h3>
 		<%= render @challenge.root_progresses %>
-		<%= link_to 'Add Progress', new_progress_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>
-		
+		<%= link_to 'Add Progress', new_progress_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>	
 	</div>
 </div>
 
