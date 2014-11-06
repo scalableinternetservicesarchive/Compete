@@ -2,7 +2,7 @@ class Challenge < ActiveRecord::Base
   enum sports: [:Swimming, :Running]
   has_many :comments
   has_many :progresses
-  validates :name, presence: true, format: { with: /\A[a-zA-Z0-9 ]+\z/, message: "only allows letters and numbers"}
+  validates :name, presence: true
   validates_uniqueness_of :name
   validates_length_of :name,
                       :minimum => 4
