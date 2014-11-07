@@ -42,3 +42,6 @@ gem 'spring',        group: :development
 
 # Use devise to handle users
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook', '1.4.0'
+gem 'figaro'

@@ -20,3 +20,6 @@
 
 #Ignore .idea made by RubyMine
 .idea/
+
+# Ignore application configuration
+/config/application.yml
