@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'homepage/index'
+
   resources :progresses
 
   resources :comments
@@ -12,7 +14,7 @@ Rails.application.routes.draw do
   #  get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
   #end
 
-  root 'challenges#index'
+  root 'homepage#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
