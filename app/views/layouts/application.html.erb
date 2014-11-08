@@ -26,7 +26,7 @@
           <ul class="nav navbar-nav navbar-left">
           <% if user_signed_in? %>
             <li <%= 'class="active"'.html_safe if current_page? root_path %>><%= link_to 'Home', root_path %></li>
-            <li <%= 'class="active"'.html_safe if current_page? root_path %>><%= link_to 'Challenges', 'challenges'%></li>
+            <li <%= 'class="active"'.html_safe if current_page? root_path %>><%= link_to 'Challenges', challenges_path %></li>
             <li <%= 'class="active"'.html_safe if current_page? new_challenge_path %>><%= link_to 'New Challenge', new_challenge_path %></li>
 
           <% else %>
