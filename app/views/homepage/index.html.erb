@@ -1,7 +1,7 @@
 <div class="jumbotron">
 	<% if user_signed_in? %>
 		<h1>Welcome back, trusted user!</h1>
-		<p class="lead">You have signed in! What the fuck do we do now?!</p>
+		<p class="lead">You have signed in!</p>
 		<%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :class => 'btn btn-large btn-danger'%>
 	<% else %>
 		<h1>Welcome, random stranger!</h1>
