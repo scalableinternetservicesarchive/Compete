@@ -1,5 +1,6 @@
 class Challenge < ActiveRecord::Base
   enum sports: [:Swimming, :Running]
+  enum categories: [:Collaboration, :Competition]
   has_many :comments
   has_many :progresses
   validates :name, presence: true

@@ -19,12 +19,24 @@
                   </div>
                  <div class="panel-body">
                     <form role="form">
-                        <div class="form-group">
-                          <div class="field">
-                            <%= f.label :name %><br>
-                           <%= f.text_field :name %>
-                         </div>
+                      <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                          <div class="form-group">
+                            <div class="field">
+                              <%= f.label :name %><br>
+                              <%= f.text_field :name %>
+                            </div>
+                          </div>
                         </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                          <div class="form-group">
+                            <div class="field">
+                              <%= f.label :category %><br>
+                              <%= f.select :category, options_for_select(Challenge.categories), include_blank:"Select a type" %>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                       <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                           <div class="form-group">

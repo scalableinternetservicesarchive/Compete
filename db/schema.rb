@@ -11,7 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141107033631) do
+
+ActiveRecord::Schema.define(version: 20141108014536) do
+
 
   create_table "challenges", force: true do |t|
     t.string   "name"
@@ -22,6 +24,8 @@ ActiveRecord::Schema.define(version: 20141107033631) do
     t.date     "stop"
     t.integer  "sport"
     t.integer  "distance"
+    t.integer  "type"
+    t.integer  "category"
   end
 
   create_table "comments", force: true do |t|
