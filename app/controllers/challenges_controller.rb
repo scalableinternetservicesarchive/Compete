@@ -89,5 +89,4 @@ class ChallengesController < ApplicationController
     def challenge_params
       params.require(:challenge).permit(:name, :description, :sport, :distance, :category)
     end
-
 end
