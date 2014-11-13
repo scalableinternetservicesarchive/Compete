@@ -3,6 +3,7 @@ class Challenge < ActiveRecord::Base
   enum categories: [:Collaboration, :Competition]
   has_many :comments
   has_many :progresses
+  has_many :users
   validates :name, presence: true
   validates_uniqueness_of :name
   validates_length_of :name,

@@ -1,6 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Owner:</strong>
+  <%= @comment.user.email if @comment.user %>
+
+</p>
+
+<p>
   <strong>Message:</strong>
   <%= @comment.message %>
 </p>
