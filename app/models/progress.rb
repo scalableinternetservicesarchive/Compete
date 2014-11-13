@@ -1,4 +1,5 @@
 class Progress < ActiveRecord::Base
   belongs_to :challenge
-  validates :challenge, presence: true
+  belongs_to :participation
+  validates :participation, presence: true
 end

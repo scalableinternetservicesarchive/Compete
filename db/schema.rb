@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141113005818) do
+ActiveRecord::Schema.define(version: 20141113053817) do
 
   create_table "challenges", force: true do |t|
     t.string   "name"
@@ -36,14 +36,26 @@ ActiveRecord::Schema.define(version: 20141113005818) do
   add_index "comments", ["challenge_id"], name: "index_comments_on_challenge_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
+  create_table "participations", force: true do |t|
+    t.integer  "challenge_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "participations", ["challenge_id"], name: "index_participations_on_challenge_id"
+  add_index "participations", ["user_id"], name: "index_participations_on_user_id"
+
   create_table "progresses", force: true do |t|
     t.string   "gain"
     t.integer  "challenge_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "participation_id"
   end
 
   add_index "progresses", ["challenge_id"], name: "index_progresses_on_challenge_id"
+  add_index "progresses", ["participation_id"], name: "index_progresses_on_participation_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

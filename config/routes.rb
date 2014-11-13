@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :participations
+
   get 'homepage/index'
 
   resources :progresses

@@ -12,6 +12,7 @@
                 Description:<br>
                 <%= @challenge.description %>
 
+
             </div>
             <div class="col-md-2">
                 Sport: <%= Challenge.sports.key(@challenge.sport) %> 
@@ -38,11 +39,21 @@
 	  			</div>
 			</div>
          </div>
+
 		</div>
+
 		<%= link_to 'Edit', edit_challenge_path(@challenge) %> |
 		<%= link_to 'Back', challenges_path %>
 		
 	</div>
+  <div class="col-md-4">
+    <strong>Participations:</strong>
+    <%= render @challenge.root_participants %>
+    <%= link_to 'Join the challenge!', participations_path(:challenge_id => @challenge.id), :method => :post, class: 'btn btn-primary btn-xs' %>
+
+  </div>
+
+</div>
 </div>
 
 <div class="row">
