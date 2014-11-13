@@ -1,5 +1,9 @@
 class CommentsController < ApplicationController
+  include Devise::Controllers::Helpers
+
+  before_action :authenticate_user!
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
+
 
   # GET /comments
   # GET /comments.json
@@ -25,7 +29,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(comment_params)
-
+    @comment.user = current_user
     respond_to do |format|
       if @comment.save
         @challenge = Challenge.find(comment_params[:challenge_id])
@@ -73,4 +77,5 @@ class CommentsController < ApplicationController
     def comment_params
       params.require(:comment).permit(:message, :challenge_id)
     end
+
 end
