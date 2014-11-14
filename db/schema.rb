@@ -13,7 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20141113053817) do
 
-
   create_table "challenges", force: true do |t|
     t.string   "name"
     t.datetime "created_at"

@@ -58,9 +58,9 @@ class ParticipationsController < ApplicationController
   # DELETE /participations/1
   # DELETE /participations/1.json
   def destroy
+    @challenge = @participation.challenge
     @participation.destroy
     respond_to do |format|
-      @challenge = Challenge.find(params[:challenge_id])
       format.html { redirect_to @challenge, notice: 'Participation was successfully destroyed.' }
       format.json { head :no_content }
     end
