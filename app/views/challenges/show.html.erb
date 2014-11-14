@@ -1,59 +1,51 @@
 
-
 <div class="row">
-	<div class="col-md-8">
-		<div class="panel panel-primary">
-		  <div class="panel-heading">
-		    <h2 class="panel-title"><%= @challenge.name %> </h2>
-		  </div>
-		  <div class="panel-body">
-          <div class="row">
-            <div class="col-md-6">
-                Description:<br>
-                <%= @challenge.description %>
-
+    <ul class="thumbnails list-unstyled">
+      <li class="col-md-8">
+        <div class="thumbnail">
+          <div class="caption" style="padding-left:15px">
+            <h3 style=""><%= @challenge.name %></h3>
+            <p><%= @challenge.description %></p>
+          </div>
+          <div class="modal-footer" style="text-align: left">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                <span class="sr-only">60% Complete</span>
+              </div>
             </div>
-            <div class="col-md-2">
-                Sport: <%= Challenge.sports.key(@challenge.sport) %> 
-                Distance: <%= @challenge.distance %>
-                Category: <%= Challenge.categories.key(@challenge.category) %>
+            <div class="row" style="text-align: center">
+              <div class="col-md-3"><b> <%= Challenge.sports.key(@challenge.sport) %> </b><br/><small>SPORT</small></div>
+              <div class="col-md-3"><b><%= Challenge.categories.key(@challenge.category) %></b><br/><small>CATEGORY</small></div>
+              <div class="col-md-3"><b><%= @challenge.distance %></b><br/><small>DISTANCE</small></div>
+              <div class="col-md-3"><b><%= (@challenge.stop - Date.today).to_i %></b><br/><small>DAYS LEFT</small></div>
             </div>
           </div>
         </div>
+      </li>
+      <!--<%= link_to 'Edit', edit_challenge_path(@challenge), class: 'btn btn-primary btn-xs' %>
+      <%= link_to 'Back', challenges_path, class: 'btn btn-info btn-xs' %> -->
+    </ul>
 
-          <div class="panel-footer">
-            <div class="progress">
-            	<% totalTime = (@challenge.stop - @challenge.start).to_i
-            		timeelapsed = (Date.today - @challenge.start).to_i
-            		
-            		if timeelapsed <= 0
-            			timeProgress = 0
-            		else 
-            			timeProgress = (((1.0*timeelapsed)/totalTime)*100).to_i
-            		end
-            	%>
 
-	  			<div class="progress-bar" role="progressbar" aria-valuenow="<%= timeProgress %>" aria-valuemin="0" aria-valuemax="100" style="width:<%= timeProgress %>%">
-	    			<%= timeProgress %>%
-	  			</div>
-			</div>
-         </div>
-		</div>
-		<%= link_to 'Edit', edit_challenge_path(@challenge) %> |
-		<%= link_to 'Back', challenges_path %>
-      </div>
     <div class="col-md-4">
-      <strong>Participations:</strong>
-      <%= render @challenge.root_participations %>
-      <%  parti = @challenge.participations.find_by(:user_id => current_user.id)
-          if parti %>
-          <%= link_to 'Leave the challenge!', participation_path(parti), :method => :delete, class: 'btn btn-danger btn-xs'%>
-      <%else%>
-          <%= link_to 'Join the challenge!', participations_path(:challenge_id => @challenge.id), :method => :post, class: 'btn btn-primary btn-xs'%>
+      <h3>Participations:</h3>
+      <% if @challenge.participations.empty? %>
+          <div class="well well-sm">
+            <div>
+              Be the first one to join the challenge!
+            </div>
+          </div>
+          <% else %>
+              <%= render @challenge.root_participations %>
+          <% end %>
+          <%  parti = @challenge.participations.find_by(:user_id => current_user.id)
+              if parti %>
+              <%= link_to 'Leave the challenge!', participation_path(parti), :method => :delete, class: 'btn btn-danger btn-xs'%>
+          <%else%>
+              <%= link_to 'Join the challenge!', participations_path(:challenge_id => @challenge.id), :method => :post, class: 'btn btn-primary btn-xs'%>
 
-      <% end %>
-
-	</div>
+          <% end %>
+    </div>
 </div>
 
 <div class="row">

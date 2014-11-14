@@ -6,6 +6,7 @@
 <% end %>
 <div class="well well-sm">
     <div>
+        <strong><%= comment.user.email if comment.user %> wrote: </strong><br>
         <%= comment.message %>
     </div>
 </div>
