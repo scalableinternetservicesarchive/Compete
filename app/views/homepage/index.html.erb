@@ -1,6 +1,10 @@
 <div class="jumbotron">
 	<% if user_signed_in? %>
-		<h1>Welcome back, trusted user!</h1>
+		<% if current_user.name %>
+			<h2>Welcome back, dear <%= current_user.name%>!</h2>
+		<% else %>
+			<h2>Welcome back, dear <%= current_user.email%>!</h2>
+		<% end %>
 		<p class="lead">You have signed in!</p>
 		<%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :class => 'btn btn-large btn-danger'%>
 	<% else %>

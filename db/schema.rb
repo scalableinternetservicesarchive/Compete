@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20141113053817) do
 
+
   create_table "challenges", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -72,6 +73,7 @@ ActiveRecord::Schema.define(version: 20141113053817) do
     t.datetime "updated_at"
     t.string   "provider"
     t.string   "uid"
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

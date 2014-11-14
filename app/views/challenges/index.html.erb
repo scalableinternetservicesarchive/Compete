@@ -5,23 +5,64 @@
     <tr>
       <th>Name</th>
       <th>Description</th>
-      <th>Options</th>
+      <th>Category</th>
+      <th>Sport</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @challenges.each do |challenge| %>
-      <tr>
+
+
+
+  <form action="/challenges">
+    <select name="sport">
+      <option value="-1">All</option>
+      <%= Challenge.sports.each do |s|%>
+      <option value="<%= s[1]%>"><%= s[0]%></option>
+          <% end %>
+    </select>
+    <select name="category">
+      <option value="-1">All</option>
+      <%= Challenge.categories.each do |t|%>
+          <option value="<%= t[1]%>"><%= t[0]%></option>
+      <% end %>
+    </select>
+    <input type="submit" value="Submit">
+  </form>
+
+
+    <% if((params[:sport] == nil || params[:sport].to_i < 0)  && (params[:category] == nil || params[:category].to_i < 0))
+
+           result = @challenges.all.find_each
+
+       elsif(params[:sport].to_i < 0  && params[:category].to_i >= 0)
+            result = @challenges.where(:category => params[:category]).each
+
+       elsif(params[:sport].to_i >= 0  && params[:category].to_i < 0)
+          result = @challenges.where(:sport => params[:sport]).each
+
+       else
+          result = @challenges.where(:sport => params[:sport],:category => params[:category]).each
+       end
+
+       result.each do |challenge|
+    %>
+
         <td><%= challenge.name %></td>
         <td><%= challenge.description %></td>
-        <td><%= link_to 'Add Comment', new_comment_path(:challenge_id => challenge.id), class: 'btn btn-primary btn-xs' %>
-        <td><%= link_to 'Add Progress', new_progress_path(:challenge_id => challenge.id), class: 'btn btn-primary btn-xs' %>
+        <td><%= Challenge.categories.key(challenge.category) %></td>
+        <td><%= Challenge.sports.key(challenge.sport) %></td>
+
+        <!-- <td><%= link_to 'Add Comment', new_comment_path(:challenge_id => challenge.id), class: 'btn btn-primary btn-xs' %> -->
+        <!-- <td><%= link_to 'Add Progress', new_progress_path(:challenge_id => challenge.id), class: 'btn btn-primary btn-xs' %> -->
 
         <td><%= link_to 'Show', challenge, class: 'btn btn-primary btn-xs' %>
         <%= link_to 'Edit', edit_challenge_path(challenge), class: 'btn btn-info btn-xs'  %>
         <%= link_to 'Destroy', challenge, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs'  %></td>
       </tr>
-    <% end %>
+
+    <% end
+        %>
   </tbody>
 </table>
 
