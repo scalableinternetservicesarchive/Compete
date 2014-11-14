@@ -1,4 +1,6 @@
 class ProgressesController < ApplicationController
+  include Devise::Controllers::Helpers
+
   before_action :set_progress, only: [:show, :edit, :update, :destroy]
 
   # GET /progresses
@@ -25,7 +27,7 @@ class ProgressesController < ApplicationController
   # POST /progresses.json
   def create
     @progress = Progress.new(progress_params)
-
+    @progress.user = current_user
     respond_to do |format|
       if @progress.save
         @challenge = Challenge.find(progress_params[:challenge_id])
