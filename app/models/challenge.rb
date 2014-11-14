@@ -4,6 +4,7 @@ class Challenge < ActiveRecord::Base
   has_many :comments
   has_many :progresses
   has_many :users
+  has_many :participations
   validates :name, presence: true
   validates_uniqueness_of :name
   validates_length_of :name,
@@ -28,6 +29,11 @@ class Challenge < ActiveRecord::Base
 
   def root_progresses
   	progresses
+  end
+
+  def root_participations
+    participations
+
   end
 
 end

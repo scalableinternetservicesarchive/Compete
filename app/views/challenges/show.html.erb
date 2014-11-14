@@ -41,7 +41,18 @@
 		</div>
 		<%= link_to 'Edit', edit_challenge_path(@challenge) %> |
 		<%= link_to 'Back', challenges_path %>
-		
+      </div>
+    <div class="col-md-4">
+      <strong>Participations:</strong>
+      <%= render @challenge.root_participations %>
+      <%  parti = @challenge.participations.find_by(:user_id => current_user.id)
+          if parti %>
+          <%= link_to 'Leave the challenge!', participation_path(parti), :method => :delete, class: 'btn btn-danger btn-xs'%>
+      <%else%>
+          <%= link_to 'Join the challenge!', participations_path(:challenge_id => @challenge.id), :method => :post, class: 'btn btn-primary btn-xs'%>
+
+      <% end %>
+
 	</div>
 </div>
 
