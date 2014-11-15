@@ -28,9 +28,10 @@ class ProgressesController < ApplicationController
   def create
     @progress = Progress.new(progress_params)
     @progress.user = current_user
+    @challenge = Challenge.find(progress_params[:challenge_id])
+    @progress.participation = @challenge.participations.find_by(:user_id => current_user.id)
     respond_to do |format|
       if @progress.save
-        @challenge = Challenge.find(progress_params[:challenge_id])
         format.html { redirect_to @challenge, notice: 'Progress was successfully created.' }
         format.json { render :show, status: :created, location: @progress }
       else
