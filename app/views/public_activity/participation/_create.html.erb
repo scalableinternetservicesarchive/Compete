@@ -1,0 +1,6 @@
+
+<% if activity.trackable %>
+<%= activity.trackable.user.email %> joined  <%= link_to activity.trackable.challenge.name, activity.trackable.challenge %>
+<% else %>
+which has since been removed
+<% end %>

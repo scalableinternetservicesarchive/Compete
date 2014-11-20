@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  include PublicActivity::Common
+
   belongs_to :challenge
   belongs_to :user
   validates :challenge, presence: true

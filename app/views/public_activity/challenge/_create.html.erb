@@ -1,0 +1,6 @@
+
+<% if activity.trackable %>
+<%= activity.trackable.user.email %> made a new challenge  <%= link_to activity.trackable.name, activity.trackable %>
+<% else %>
+which has since been removed
+<% end %>

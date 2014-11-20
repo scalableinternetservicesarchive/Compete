@@ -28,10 +28,11 @@ class ParticipationsController < ApplicationController
     @participation = Participation.new(participation_params)
     @participation.user = current_user
     @participation.challenge_id = params[:challenge_id]
-
+    @participation.status = 1
     respond_to do |format|
       if @participation.save
         @challenge = Challenge.find(params[:challenge_id])
+        @participation.create_activity :create, owner: current_user
         format.html { redirect_to @challenge, notice: 'Participation was successfully created.' }
         format.json { render :show, status: :created, location: @participation }
       else

@@ -32,6 +32,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     respond_to do |format|
       if @comment.save
+        @comment.create_activity :create, owner: current_user
         @challenge = Challenge.find(comment_params[:challenge_id])
         format.html { redirect_to @challenge, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
