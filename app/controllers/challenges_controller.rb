@@ -1,4 +1,7 @@
 class ChallengesController < ApplicationController
+  include Devise::Controllers::Helpers
+
+  before_filter :require_premisson, only: [:edit, :destroy]
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
 
   # GET /challenges
@@ -36,6 +39,7 @@ class ChallengesController < ApplicationController
     @challenge.stop = Date::civil(params[:challenge]['stop(1i)'].to_i,
                                   params[:challenge]['stop(2i)'].to_i,
                                   params[:challenge]['stop(3i)'].to_i)
+    @challenge.user = current_user
     respond_to do |format|
       if @challenge.save
         format.html { redirect_to @challenge, notice: 'Challenge was successfully created.' }
@@ -89,4 +93,12 @@ class ChallengesController < ApplicationController
     def challenge_params
       params.require(:challenge).permit(:name, :description, :sport, :distance, :category)
     end
+
+  def require_premisson
+    if current_user != Challenge.find(params[:id]).user
+      redirect_to challenges_path
+    end
+  end
+
+
 end

@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 	has_many :comments
   has_many :users
 	has_many :progresses
+	has_many :challenges
 
 	  devise :database_authenticatable, :registerable,
 	         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
