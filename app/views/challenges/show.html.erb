@@ -27,15 +27,20 @@
 
                 <% elsif @challenge.category==1
                      @challenge.participations.each do |participations|
-                       if participations.total_gain > 0 && participations.total_gain < @challenge.distance
-                         gain = (participations.total_gain.to_f/@challenge.distance) * 100
-                         else
-                           gain = 100
-                           end %>
-                    <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= gain %>%">
-                <%= participations.user.email %>
-                </div> </div>
+                       gain = (participations.total_gain.to_f/@challenge.distance) * 100
+                        if gain < 100 %>
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= gain %>%">
+                            <%= participations.user.email %>
+                          </div>
+                        </div>
+                         <% else %>
+                              <div class="progress">
+                                   <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                    <%= participations.user.email %> is done!
+                                   </div>
+                              </div>
+                           <% end %>
 
                     <% end
                end %>
