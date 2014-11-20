@@ -4,14 +4,47 @@
       <li class="col-md-8">
         <div class="thumbnail">
           <div class="caption" style="padding-left:15px">
-            <h3 style=""><%= @challenge.name %></h3>
+            <h3><%= @challenge.name %></h3>
             <p><%= @challenge.description %></p>
           </div>
           <div class="modal-footer" style="text-align: left">
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                <span class="sr-only">60% Complete</span>
-              </div>
+            <% if @challenge.category == 0
+                 gain = (@challenge.collab_gain.to_f / @challenge.distance) * 100
+                if gain >= 100 %>
+                    <div class="progress">
+                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                    Done!
+                    </div>
+                    </div>
+                <%
+                else %>
+                    <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="<%= gain %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= gain %>%">
+                      <%= @challenge.collab_gain %> meters
+                    </div>
+                    </div>
+                <%end%>
+
+                <% elsif @challenge.category==1
+                     @challenge.participations.each do |participations|
+                       gain = (participations.total_gain.to_f/@challenge.distance) * 100
+                        if gain < 100 %>
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= gain %>%">
+                            <%= participations.user.email %>
+                          </div>
+                        </div>
+                         <% else %>
+                              <div class="progress">
+                                   <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                    <%= participations.user.email %> is done!
+                                   </div>
+                              </div>
+                           <% end %>
+
+                    <% end
+               end %>
+
             </div>
             <div class="row" style="text-align: center">
               <div class="col-md-3"><b> <%= Challenge.sports.key(@challenge.sport) %> </b><br/><small>SPORT</small></div>
@@ -20,7 +53,6 @@
               <div class="col-md-3"><b><%= (@challenge.stop - Date.today).to_i %></b><br/><small>DAYS LEFT</small></div>
             </div>
           </div>
-        </div>
       </li>
       <!--<%= link_to 'Edit', edit_challenge_path(@challenge), class: 'btn btn-primary btn-xs' %>
       <%= link_to 'Back', challenges_path, class: 'btn btn-info btn-xs' %> -->
@@ -58,16 +90,8 @@
 	<div class="col-md-4">
 		<h3>Progresses</h3>
 		<%= render @challenge.root_progresses %>
-		<%= link_to 'Add Progress', new_progress_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>	
+      <% if @challenge.participations.find_by(:user_id => current_user.id) %>
+		<%= link_to 'Add Progress', new_progress_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>
+          <% end %>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-

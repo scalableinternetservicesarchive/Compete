@@ -36,4 +36,8 @@ class Challenge < ActiveRecord::Base
 
   end
 
+  def collab_gain
+    progresses.sum(:gain)
+  end
+
 end
