@@ -6,6 +6,7 @@
           <div class="caption" style="padding-left:15px">
             <h3><%= @challenge.name %></h3>
             <p><%= @challenge.description %></p>
+            <p>Owner: <%= @challenge.user.email if @challenge.user%></p>
           </div>
           <div class="modal-footer" style="text-align: left">
             <% if @challenge.category == 0
@@ -26,7 +27,7 @@
                 <%end%>
 
                 <% elsif @challenge.category==1
-                     @challenge.participations.each do |participations|
+                       @challenge.participations.limit(3).each do |participations|
                        gain = (participations.total_gain.to_f/@challenge.distance) * 100
                         if gain < 100 %>
                         <div class="progress">
