@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'activities/index'
+
   resources :participations
 
   get 'homepage/index'
 
+  resources :activities
   resources :progresses
 
   resources :comments

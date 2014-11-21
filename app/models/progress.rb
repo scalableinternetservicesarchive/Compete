@@ -1,4 +1,6 @@
 class Progress < ActiveRecord::Base
+  include PublicActivity::Common
+
   belongs_to :challenge
   belongs_to :user
   belongs_to :participation

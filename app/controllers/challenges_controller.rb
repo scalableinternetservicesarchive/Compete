@@ -42,6 +42,7 @@ class ChallengesController < ApplicationController
     @challenge.user = current_user
     respond_to do |format|
       if @challenge.save
+        @challenge.create_activity :create, owner: current_user
         format.html { redirect_to @challenge, notice: 'Challenge was successfully created.' }
         format.json { render :show, status: :created, location: @challenge }
       else

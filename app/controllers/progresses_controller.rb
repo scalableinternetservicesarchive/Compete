@@ -32,6 +32,7 @@ class ProgressesController < ApplicationController
     @progress.participation = @challenge.participations.find_by(:user_id => current_user.id)
     respond_to do |format|
       if @progress.save
+        @progress.create_activity :create, owner: current_user
         format.html { redirect_to @challenge, notice: 'Progress was successfully created.' }
         format.json { render :show, status: :created, location: @progress }
       else

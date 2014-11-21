@@ -1,4 +1,6 @@
 class Participation < ActiveRecord::Base
+  include PublicActivity::Common
+
   belongs_to :user
   belongs_to :challenge
   has_many :progresses

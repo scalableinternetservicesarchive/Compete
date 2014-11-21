@@ -1,4 +1,8 @@
 class Challenge < ActiveRecord::Base
+  include PublicActivity::Common
+
+
+
   enum sports: [:Swimming, :Running]
   enum categories: [:Collaboration, :Competition]
   belongs_to :user

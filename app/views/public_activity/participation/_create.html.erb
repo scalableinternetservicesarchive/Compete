@@ -1,0 +1,18 @@
+
+<% if activity.trackable && activity.trackable.challenge %>
+<article class="timeline-entry">
+
+            <div class="timeline-entry-inner">
+
+                <div class="timeline-icon bg-info">
+                    <i class="entypo-feather"></i>
+                </div>
+
+                <div class="timeline-label">
+                    <h2><%= activity.trackable.user.email %> <span>joined a <%= link_to activity.trackable.challenge.name, activity.trackable.challenge %></span></h2>
+                </div>
+            </div>
+
+        </article>
+<% else %>
+<% end %>
