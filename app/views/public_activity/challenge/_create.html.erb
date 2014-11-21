@@ -1,6 +1,20 @@
 
 <% if activity.trackable %>
-<%= activity.trackable.user.email %> made a new challenge  <%= link_to activity.trackable.name, activity.trackable %>
+
+<article class="timeline-entry">
+
+            <div class="timeline-entry-inner">
+
+                <div class="timeline-icon bg-secondary">
+                    <i class="entypo-feather"></i>
+                </div>
+
+                <div class="timeline-label">
+                    <h2><%= activity.trackable.user.email %> <span>made a new challenge named <%= link_to activity.trackable.name, activity.trackable%></span></h2>
+                    <p> <%= activity.trackable.description %>
+                </div>
+            </div>
+
+        </article>
 <% else %>
-which has since been removed
 <% end %>

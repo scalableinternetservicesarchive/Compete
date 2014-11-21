@@ -1,4 +1,30 @@
 <h1> Activities: </h1>
+
+<div class="row">
+  <ul class="thumbnails list-unstyled">
+    <li class="col-md-4">
+      <div class="thumbnail">
+        <div class="caption" style="padding-left:15px">
+          <h3><%= current_user.name if current_user.name %></h3>
+          <h2><%= current_user.email %></h2>
+        </div>
+
+      </div>
+      <div class="row" style="text-align: center">
+        <div class="col-md-6"><b> <%= current_user.participations.count() %> </b><br/><small>PARTICIPATING IN</small></div>
+        <div class="col-md-6"><b><%= current_user.progresses.sum(:gain) %> m</b><br/><small>TOTAL GAIN</small></div>
+
+      </div>
+</li>
+</ul>
+  <div class="timeline-centered col-md-8">
+
 <% @activities.each do |activity| %>
     <%= render_activity activity %><br>
 <% end %>
+
+  </div>
+
+
+  </div>
+</div>

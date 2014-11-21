@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :users
 	has_many :progresses
 	has_many :challenges
+	has_many :participations
 
 	  devise :database_authenticatable, :registerable,
 	         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
@@ -26,4 +27,6 @@ class User < ActiveRecord::Base
 	      end
 	    end
 	end
+
+
 end

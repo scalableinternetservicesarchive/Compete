@@ -1,6 +1,21 @@
 
-<% if activity.trackable %>
-<%= activity.trackable.user.email %> added a comment to  <%= link_to activity.trackable.challenge.name, activity.trackable.challenge %>
+<% if activity.trackable && activity.trackable.challenge %>
+
+
+        <article class="timeline-entry">
+
+            <div class="timeline-entry-inner">
+
+                <div class="timeline-icon bg-success">
+                    <i class="entypo-feather"></i>
+                </div>
+
+                <div class="timeline-label">
+                    <h2><%= activity.trackable.user.email %> <span>posted a comment on <%= link_to activity.trackable.challenge.name, activity.trackable.challenge %></span></h2>
+                    <p> <%= activity.trackable.message %>
+                </div>
+            </div>
+
+        </article>
 <% else %>
-which has since been removed
 <% end %>
