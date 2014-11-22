@@ -1,37 +1,42 @@
-<h1>Challenges</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Category</th>
-      <th>Sport</th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="container">
+  <hgroup class="mb20">
 
 
 
-  <form action="/challenges">
-    <select name="sport">
-      <option value="-1">All</option>
-      <%= Challenge.sports.each do |s|%>
-      <option value="<%= s[1]%>"><%= s[0]%></option>
-          <% end %>
-    </select>
-    <select name="category">
-      <option value="-1">All</option>
-      <%= Challenge.categories.each do |t|%>
-          <option value="<%= t[1]%>"><%= t[0]%></option>
-      <% end %>
-    </select>
-    <input type="submit" value="Search">
-  </form>
+  <div class="row">
 
 
-    <% if((params[:sport] == nil || params[:sport].to_i < 0)  && (params[:category] == nil || params[:category].to_i < 0))
+    <div class="col-md-4"><h1>Challenges</h1>
+      <h2 class="lead"><strong class="text-danger"> <%= Challenge.count() %> </strong> challenges were found </h2>
+    </div>
+
+      <div class="col-md-4">
+          <form action="/challenges">
+              <select name="sport">
+                <option value="-1">All</option>
+                <%= Challenge.sports.each do |s|%>
+                    <option value="<%= s[1]%>"><%= s[0]%></option>
+                <% end %>
+              </select>
+              <select name="category">
+                <option value="-1">All</option>
+                <%= Challenge.categories.each do |t|%>
+                    <option value="<%= t[1]%>"><%= t[0]%></option>
+                <% end %>
+              </select>
+              <input type="submit" value="Search">
+          </form>
+      </div>
+
+      <div class="col-md-4"><%= link_to 'New Challenge', new_challenge_path, class: 'btn btn-success btn-xs' %></div>
+</div>
+
+  </hgroup>
+
+
+
+  <% if((params[:sport] == nil || params[:sport].to_i < 0)  && (params[:category] == nil || params[:category].to_i < 0))
 
            result = @challenges.all.find_each
 
@@ -48,26 +53,48 @@
        result.each do |challenge|
     %>
 
-        <td><%= challenge.name %></td>
-        <td><%= challenge.description %></td>
-        <td><%= Challenge.categories.key(challenge.category) %></td>
-        <td><%= Challenge.sports.key(challenge.sport) %></td>
 
-        <!-- <td><%= link_to 'Add Comment', new_comment_path(:challenge_id => challenge.id), class: 'btn btn-primary btn-xs' %> -->
-        <!-- <td><%= link_to 'Add Progress', new_progress_path(:challenge_id => challenge.id), class: 'btn btn-primary btn-xs' %> -->
 
-        <td><%= link_to 'Show', challenge, class: 'btn btn-primary btn-xs' %>
-          <% if challenge.user == current_user %>
-        <%= link_to 'Edit', edit_challenge_path(challenge), class: 'btn btn-info btn-xs'  %>
-        <%= link_to 'Destroy', challenge, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs'  %></td>
-              <% end %>
-      </tr>
+      <section class="col-xs-12 col-sm-6 col-md-12">
+        <article class="search-result row">
+          <div class="col-xs-12 col-sm-12 col-md-3">
+            <% if challenge.sport == 0 %>
+                <a class="thumbnail"> <%= image_tag("Swimming.png") %></a>
+            <% else %>
+                <a class="thumbnail"> <%= image_tag("Running.jpeg") %></a>
+            <% end %>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-2">
+            <ul class="meta-search">
+              <li><i class="glyphicon glyphicon-calendar"></i> <span><%= challenge.stop %></span></li>
+              <li><i class="glyphicon glyphicon-user"></i> <span> <%= challenge.participations.count() %> </span></li>
+              <li><i class="glyphicon glyphicon-asterisk"></i> <span> <%= Challenge.categories.key(challenge.category) %> </span></li>
+              <li><i class="glyphicon glyphicon-asterisk"></i> <span> <%= Challenge.sports.key(challenge.sport) %> </span></li>
+
+
+            </ul>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+            <h3><%= link_to challenge.name, challenge %></h3>
+
+            <p><%= challenge.description %></p>
+            <% if challenge.user == current_user %>
+                <%= link_to edit_challenge_path(challenge), class: 'btn btn-xs' do %>
+                <i class="glyphicon glyphicon-edit"></i>
+            <% end %>
+                <%= link_to challenge, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs' do %>
+                    <i class="glyphicon glyphicon-remove"></i>
+                    </td>
+                <% end %>
+            <% end %>
+          </div>
+          <span class="clearfix borda"></span>
+        </article>
+      </section>
 
     <% end
         %>
-  </tbody>
-</table>
 
-<br>
+  </div>
 
-<%= link_to 'New Challenge', new_challenge_path, class: 'btn btn-success btn-xs' %>
+

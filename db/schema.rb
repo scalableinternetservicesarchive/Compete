@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20141120194346) do
   add_index "participations", ["user_id"], name: "index_participations_on_user_id"
 
   create_table "progresses", force: true do |t|
-    t.integer  "gain"
+    t.string   "gain"
     t.integer  "challenge_id"
     t.datetime "created_at"
     t.datetime "updated_at"
