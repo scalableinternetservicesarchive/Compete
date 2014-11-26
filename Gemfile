@@ -46,3 +46,6 @@ gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'
 gem 'figaro'
 gem 'public_activity'
+
+# will_paginate
+gem 'will_paginate', '~> 3.0.5'
