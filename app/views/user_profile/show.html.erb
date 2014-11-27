@@ -10,7 +10,7 @@
               
           <ul class="list-group">
             <li class="list-group-item text-muted">Profile</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Name</strong></span> Joseph Doe</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Name</strong></span> <%= @user.name %> </li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Age</strong></span> 23</li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Location</strong></span> California</li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> <%= convertToShortDate(@user.created_at) %></li>

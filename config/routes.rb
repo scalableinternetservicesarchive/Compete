@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :challenges
   resources :user_profile
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks"}
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", registrations: 'registrations'}
   resources :users, :only => [:show]
 
   #devise_scope :user do
