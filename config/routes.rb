@@ -4,16 +4,14 @@ Rails.application.routes.draw do
 
   resources :participations
 
-  get 'homepage/index'
-
   resources :activities
   resources :progresses
-
   resources :comments
-
   resources :challenges
+  resources :user_profile
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks"}
+  resources :users, :only => [:show]
 
   #devise_scope :user do
   #  get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
