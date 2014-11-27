@@ -2,7 +2,7 @@
 <hr>
 <div class="container">
     <div class="row">
-      <div class="col-sm-10"><h1><%= @user.email %></h1></div>
+      <div class="col-sm-10"><h1><%= @user.name %></h1></div>
       <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>
     </div>
     <div class="row">
@@ -19,7 +19,14 @@
           </ul> 
                
           <div class="panel panel-default">
-            <div class="panel-heading text-muted">About me <i class="fa fa-link fa-1x"></i></div>
+            <div class="panel-heading text-muted">About me <i class="fa fa-link fa-1x"></i>
+            <% if current_user.id == @user.id %>
+              <span class="pull-right">
+              <%= link_to user_profile_path(@user.id), class: "btn btn-sm btn-warning" do %>
+                <i class="glyphicon glyphicon-edit"></i> 
+              <% end %>
+          <% end %>
+          </div>
             <div class="panel-body"> blablablbalblbalblablalba</div>
           </div>
           
@@ -47,12 +54,12 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Label 1</th>
-                      <th>Label 2</th>
-                      <th>Label 3</th>
-                      <th>Label </th>
-                      <th>Label </th>
-                      <th>Label </th>
+                      <th>Name</th>
+                      <th>Sport</th>
+                      <th>Category</th>
+                      <th>Start</th>
+                      <th>End</th>
+                      <th>???</th>
                     </tr>
                   </thead>
                   <tbody id="items">
