@@ -15,11 +15,9 @@ class UserProfileController < ApplicationController
       		flash[:notice] = 'Profile updated.'
     	else
       		redirect_to user_profile_path(@user.id)
-    		flash[:notice] = 'Fuck'
+    		flash[:notice] = 'Could not update profile.'
     	end
   	end
-
-    private
 
     def user_params
     	params.require(:user).permit(:name, :location, :birthday, :email, :password, :password_confirmation, :current_password)
