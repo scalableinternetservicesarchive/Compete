@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120194346) do
+ActiveRecord::Schema.define(version: 20141127052221) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20141120194346) do
   add_index "participations", ["user_id"], name: "index_participations_on_user_id"
 
   create_table "progresses", force: true do |t|
-    t.string   "gain"
+    t.integer  "gain"
     t.integer  "challenge_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -95,6 +95,9 @@ ActiveRecord::Schema.define(version: 20141120194346) do
     t.datetime "updated_at"
     t.string   "provider"
     t.string   "uid"
+    t.string   "birthday"
+    t.string   "location"
+    t.text     "description"
     t.string   "name"
   end
 
