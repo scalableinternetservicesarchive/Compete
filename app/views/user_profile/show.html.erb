@@ -11,8 +11,8 @@
       <ul class="list-group">
         <li class="list-group-item text-muted">Profile</li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Name</strong></span> <%= @user.name %> </li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong>Age</strong></span> x<%= @user.birthday%> </li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong>Location</strong></span>x <%= @user.location %> </li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Age</strong></span> <%= @user.birthday%> </li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Location</strong></span> <%= @user.location %> </li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> <%= convertToShortDate(@user.created_at) %></li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Last seen</strong></span> <%= convertToShortDate(@user.last_sign_in_at) %></li>
       </ul>
