@@ -1,21 +1,22 @@
+
 <hr>
 <div class="container">
   <div class="row">
-    <div class="col-sm-10"><h1><%= @user.name %></h1></div>
+    <div class="col-sm-10"><h1><%= current_user.name %></h1></div>
     <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>
   </div>
   <div class="row">
     <div class="col-sm-3">
-    <!--left col-->   
+      <!--left col-->
       <ul class="list-group">
         <li class="list-group-item text-muted">Profile</li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Name</strong></span> <%= @user.name %> </li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong>Age</strong></span> <%= @user.birthday%> </li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong>Location</strong></span> <%= @user.location %> </li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Age</strong></span> x<%= @user.birthday%> </li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Location</strong></span>x <%= @user.location %> </li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> <%= convertToShortDate(@user.created_at) %></li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Last seen</strong></span> <%= convertToShortDate(@user.last_sign_in_at) %></li>
-      </ul> 
-             
+      </ul>
+
       <div class="panel panel-default">
         <div class="panel-heading text-muted">About me <i class="fa fa-link fa-1x"></i>
           <% if current_user.id == @user.id %>
@@ -27,14 +28,14 @@
         </div>
         <div class="panel-body"> My random description</div>
       </div>
-        
+
       <ul class="list-group">
         <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong>Ongoing challenges</strong></span> 4</li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Ongoing challenges</strong></span> <%= current_user.challenges.count() %></li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Completed challenges</strong></span> 3</li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Some other stuff</strong></span> x</li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>More stuff</strong></span> x</li>
-      </ul>     
+      </ul>
     </div>
     <!--/left col-->
 
@@ -50,30 +51,9 @@
       <div class="tab-content">
         <div class="tab-pane active" id="home">
           <div class="table-responsive">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Hva</th>
-                  <th>Skulle</th>
-                  <th>Vi</th>
-                  <th>Ha</th>
-                  <th>Her</th>
-                  <th>???</th>
-                </tr>
-              </thead>
-              <tbody id="items">
-                <tr>
-                  <td>1</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
-              </tbody>
-            </table>
+
+              <%= render :template => "activities/index" %>
+
             <hr>
             <div class="row">
               <div class="col-md-4 col-md-offset-4 text-center">
@@ -90,26 +70,28 @@
           <div class="table-responsive">
             <table class="table table-hover">
               <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Sport</th>
-                  <th>Category</th>
-                  <th>Start</th>
-                  <th>End</th>
-                  <th>???</th>
-                </tr>
+              <tr>
+                <th>Name</th>
+                <th>Sport</th>
+                <th>Category</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Participants</th>
+              </tr>
               </thead>
               <tbody id="items">
-                <tr>
-                  <td>1</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
+              <% current_user.participations.paginate(:page => params[:page], :per_page => 10).each do |participation| %>
+              <tr>
+                <td><%= participation.challenge.name %></td>
+                <td><%= Challenge.sports.key(participation.challenge.sport) %></td>
+                <td><%= Challenge.categories.key(participation.challenge.category) %></td>
+                <td><%= participation.challenge.start %></td>
+                <td><%= participation.challenge.stop %></td>
+                <td><%= participation.challenge.participations.count()%></td>
+
+
+              </tr>
+                  <% end %>
               </tbody>
             </table>
             <hr>
@@ -122,7 +104,7 @@
           <hr>
         </div>
         <!--/end messages-->
-          
+
         <!--/begin messages-->
         <div class="tab-pane" id="messages">
           <ul class="list-group">
@@ -134,70 +116,70 @@
             <li class="list-group-item text-right"><a href="#" class="pull-left">Wesm sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
             <li class="list-group-item text-right"><a href="#" class="pull-left">For therepien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
             <li class="list-group-item text-right"><a href="#" class="pull-left">Also we, havesapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-            <li class="list-group-item text-right"><a href="#" class="pull-left">Swedish chef is assaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>    
+            <li class="list-group-item text-right"><a href="#" class="pull-left">Swedish chef is assaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
           </ul>
         </div><!--/end messages-->
 
         <!--begin settings-->
         <div class="tab-pane" id="settings">
           <hr>
-            <%= form_for(@user, :url => {:action => 'update', :id => @user.id}) do |f| %>
-            <form class="form" action="##" method="post" id="registrationForm">
-              
-              <div class="form-group">
-                <div class="col-xs-6">
-                  <label for="name"><h4>Name</h4></label>
-                  <%= f.text_field :name, :class => 'form-control', :placeholder => "Enter your name" %>
-                </div>
-              </div>
-      
-              <div class="form-group">
-                <div class="col-xs-6">
-                  <label for="age"><h4>Age</h4></label>
-                  <%= f.text_field :birthday, :class => 'form-control', :placeholder => "Enter your birthday" %>
-                </div>
-              </div>
-              
-              <div class="form-group">
-                <div class="col-xs-6">
-                  <label for="location"><h4>Location</h4></label>
-                  <%= f.text_field :location, :class => 'form-control', :placeholder => "Enter your location" %>
-                </div>
-              </div>
+          <%= form_for(@user, :url => {:action => 'update', :id => @user.id}) do |f| %>
+              <form class="form" action="##" method="post" id="registrationForm">
 
-              <div class="form-group"> 
-                <div class="col-xs-6">
-                  <label for="email"><h4>Email</h4></label>
-                  <%= f.email_field :email, :class => 'form-control', :placeholder => "Enter your email" %>
+                <div class="form-group">
+                  <div class="col-xs-6">
+                    <label for="name"><h4>Name</h4></label>
+                    <%= f.text_field :name, :class => 'form-control', :placeholder => "Enter your name" %>
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group">
-                <div class="col-xs-6">
-                  <label for="password"><h4>Password</h4></label>
-                  <%= f.password_field :password, :class => 'form-control', :placeholder => "Enter your new password" %>
+                <div class="form-group">
+                  <div class="col-xs-6">
+                    <label for="age"><h4>Age</h4></label>
+                    <%= f.text_field :birthday, :class => 'form-control', :placeholder => "Enter your birthday" %>
+                  </div>
                 </div>
-              </div>
-              
-              <div class="form-group">
-                <div class="col-xs-6">
-                  <label for="password2"><h4>Verify</h4></label>
-                  <%= f.password_field :password_confirmation, :class => 'form-control', :placeholder => "Re-enter your new password" %>
+
+                <div class="form-group">
+                  <div class="col-xs-6">
+                    <label for="location"><h4>Location</h4></label>
+                    <%= f.text_field :location, :class => 'form-control', :placeholder => "Enter your location" %>
+                  </div>
                 </div>
-              </div>
-                
-              <div class="form-group">
-                <div class="col-xs-12">
-                  <br>
+
+                <div class="form-group">
+                  <div class="col-xs-6">
+                    <label for="email"><h4>Email</h4></label>
+                    <%= f.email_field :email, :class => 'form-control', :placeholder => "Enter your email" %>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-xs-6">
+                    <label for="password"><h4>Password</h4></label>
+                    <%= f.password_field :password, :class => 'form-control', :placeholder => "Enter your new password" %>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-xs-6">
+                    <label for="password2"><h4>Verify</h4></label>
+                    <%= f.password_field :password_confirmation, :class => 'form-control', :placeholder => "Re-enter your new password" %>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-xs-12">
+                    <br>
                     <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
                     <button class="btn btn-lg" href="#home"><i class="glyphicon glyphicon-remove"></i> Cancel</button>
+                  </div>
                 </div>
+              </form>
               </div>
-            </form>
-          </div>
           <% end %>
-        </div>
-        <!--/end settings-->
-      </div>
+          </div>
+      <!--/end settings-->
     </div>
   </div>
+</div>

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<ht
 <head>
   <title>Compete</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -7,7 +6,7 @@
   <%= csrf_meta_tags %>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 </head>
-
+<body>
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div data-spy="affix" data-offset-top="0" data-offset-bottom="200">
     <div id="nav">
@@ -48,9 +47,8 @@
       </div>
     </div>
   </div>
-</div>
 
-<body class="container">
+<div class="container">
 
 
 <% if notice %>
@@ -61,6 +59,6 @@
 <% end %>
 
 <%= yield %>
-
+</div>
 </body>
 </html>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141127052221) do
+ActiveRecord::Schema.define(version: 20141203032517) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20141127052221) do
     t.integer  "distance"
     t.integer  "category"
     t.integer  "user_id"
+    t.integer  "status"
   end
 
   add_index "challenges", ["user_id"], name: "index_challenges_on_user_id"
