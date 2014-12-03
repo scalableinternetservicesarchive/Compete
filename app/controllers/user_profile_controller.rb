@@ -1,4 +1,5 @@
 class UserProfileController < ApplicationController
+	include Devise::Controllers::Helpers
 
 	helper_method :convertToShortDate, :convertBirthdayToAge
 	
