@@ -44,4 +44,7 @@ class Challenge < ActiveRecord::Base
     progresses.sum(:gain)
   end
 
+  def self.all_cached
+    Rails.cache.fetch('Challenges.all') { all }
+  end
 end
