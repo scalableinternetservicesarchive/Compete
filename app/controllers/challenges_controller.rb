@@ -4,6 +4,8 @@ class ChallengesController < ApplicationController
   before_filter :require_premisson, only: [:edit, :destroy]
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
 
+  caches_action :index, :show, :create
+
   # GET /challenges
   # GET /challenges.json
   def index

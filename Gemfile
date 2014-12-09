@@ -49,3 +49,6 @@ gem 'public_activity'
 
 # will_paginate
 gem 'will_paginate', '~> 3.0.5'
+
+#Action_caching
+gem 'actionpack-action_caching'
