@@ -6,9 +6,9 @@ class Challenge < ActiveRecord::Base
   enum sports: [:Swimming, :Running]
   enum categories: [:Collaboration, :Competition]
   belongs_to :user
-  has_many :comments
-  has_many :progresses
-  has_many :participations
+  has_many :comments, :dependent => :delete_all
+  has_many :progresses, :dependent => :delete_all
+  has_many :participations, :dependent => :delete_all
   validates :name, presence: true
   validates_uniqueness_of :name
   validates_length_of :name,
@@ -16,8 +16,8 @@ class Challenge < ActiveRecord::Base
 
   validate :check_dates
 
-  after_save    :expire_challenge_all_cache_all_cache
-  after_destroy :expire_challenge_all_cache_all_cache
+  after_save    :expire_challenge_all_cache
+  after_destroy :expire_challenge_all_cache
 
   def expire_challenge_all_cache
     Rails.cache.delete('Challenge.all')

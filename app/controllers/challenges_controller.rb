@@ -10,7 +10,7 @@ class ChallengesController < ApplicationController
   # GET /challenges.json
   def index
     @challenges = Challenge.all_cached
-    @stats = Rails.cache.stats.first.last
+    #@stats = Rails.cache.stats.first.last
 
   end
 
