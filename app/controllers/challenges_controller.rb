@@ -4,7 +4,7 @@ class ChallengesController < ApplicationController
   before_filter :require_premisson, only: [:edit, :destroy]
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
 
-  caches_action :index, :show, :create
+  caches_action :create
 
   # GET /challenges
   # GET /challenges.json
@@ -12,10 +12,6 @@ class ChallengesController < ApplicationController
     @challenges = Challenge.all_cached
     @stats = Rails.cache.stats.first.last
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @challenges }
-    end
   end
 
   # GET /challenges/1

@@ -16,6 +16,12 @@ class Challenge < ActiveRecord::Base
 
   validate :check_dates
 
+  after_save    :expire_challenge_all_cache_all_cache
+  after_destroy :expire_challenge_all_cache_all_cache
+
+  def expire_challenge_all_cache
+    Rails.cache.delete('Challenge.all')
+  end
 
   def check_dates
     if self.start.present? && self.start < Date.today
