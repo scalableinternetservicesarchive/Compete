@@ -4,14 +4,13 @@ class ChallengesController < ApplicationController
   before_filter :require_premisson, only: [:edit, :destroy]
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
 
-  caches_action :create
+  caches_action :index, :show
 
   # GET /challenges
   # GET /challenges.json
   def index
-    @challenges = Challenge.all_cached
+    @challenge = Challenge.all_cached
     #@stats = Rails.cache.stats.first.last
-
   end
 
   # GET /challenges/1
@@ -59,6 +58,7 @@ class ChallengesController < ApplicationController
   # PATCH/PUT /challenges/1
   # PATCH/PUT /challenges/1.json
   def update
+    expire_action :action => :show
     @challenge.start = Date::civil(params[:challenge]['start(1i)'].to_i,
                                    params[:challenge]['start(2i)'].to_i,
                                    params[:challenge]['start(3i)'].to_i)
@@ -81,6 +81,7 @@ class ChallengesController < ApplicationController
   # DELETE /challenges/1
   # DELETE /challenges/1.json
   def destroy
+    expire_action :action => :show
     @challenge.destroy
     respond_to do |format|
       format.html { redirect_to challenges_url, notice: 'Challenge was successfully destroyed.' }
