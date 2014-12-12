@@ -16,8 +16,8 @@ class Challenge < ActiveRecord::Base
 
   validate :check_dates
 
-  after_save    :expire_challenge_all_cache
-  after_destroy :expire_challenge_all_cache
+  #after_save    :expire_challenge_all_cache
+  #after_destroy :expire_challenge_all_cache
 
   def check_dates
     if self.start.present? && self.start < Date.today
@@ -45,13 +45,13 @@ class Challenge < ActiveRecord::Base
   def collab_gain
     progresses.sum(:gain)
   end
-
+=begin
   def self.all_cached
     Rails.cache.fetch('Challenge.all') { all }
   end
 
   def expire_challenge_all_cache
     Rails.cache.delete('Challenge.all')
-    puts "hello"
   end
+=end
 end
