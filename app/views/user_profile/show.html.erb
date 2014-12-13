@@ -1,44 +1,34 @@
-
 <hr>
 <div class="container">
   <div class="row">
     <div class="col-sm-2"><a class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>
   </div>
+
   <div class="row">
     <div class="col-sm-3">
       <!--left col-->
       <ul class="list-group">
         <li class="list-group-item text-muted">Profile</li>
-
-        <% if blank? === @user.name  %>
-          <li class="list-group-item text-right"><span class="pull-left"><strong>Name</strong></span><%= @user.name %> </li>
-        <% else %>
-          <li class="list-group-item text-right"><span class="pull-left"><strong>Name</strong></span> None </li>
-        <% end %>
-        <% if blank? === @user.birthday  %>
-          <li class="list-group-item text-right"><span class="pull-left"><strong>Age</strong></span> <%= @user.birthday%> </li>
-        <% else %>
-          <li class="list-group-item text-right"><span class="pull-left"><strong>Age</strong></span> 0 </li>
-        <% end %>
-        <% if blank? === @user.location  %>
-          <li class="list-group-item text-right"><span class="pull-left"><strong>Location</strong></span> <%= @user.location %> </li>
-        <% else%>
-          <li class="list-group-item text-right"><span class="pull-left"><strong>Location</strong></span> None </li>
-        <% end %>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Name</strong></span>
+          <%= @user.name.present? ? @user.name : "None" %> </li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Age</strong></span>
+          <%= @user.birthday.present? ? @user.birthday : "None" %> </li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Location</strong></span>
+          <%= @user.location.present? ? @user.location : "None" %></li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> <%= convertToShortDate(@user.created_at) %></li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Last seen</strong></span> <%= convertToShortDate(@user.last_sign_in_at) %></li>
       </ul>
 
       <div class="panel panel-default">
         <div class="panel-heading text-muted">About me <i class="fa fa-link fa-1x"></i>
-          <% if current_user.id == @user.id %>
+          <% if current_user == @user %>
             <span class="pull-right">
             <%= link_to user_profile_path(@user.id), class: "btn btn-sm btn-warning" do %>
               <i class="glyphicon glyphicon-edit"></i> 
             <% end %>
           <% end %>
         </div>
-        <div class="panel-body"> My random description</div>
+        <div class="panel-body"> <%= @user.description %> </div>
       </div>
 
       <ul class="list-group">
@@ -64,7 +54,7 @@
         <div class="tab-pane active" id="home">
           <div class="table-responsive">
 
-              <%= render :template => "activities/index" %>
+            <%= render :template => "activities/index" %>
 
             <hr>
             <div class="row">
@@ -93,17 +83,17 @@
               </thead>
               <tbody id="items">
               <% current_user.participations.paginate(:page => params[:page], :per_page => 10).each do |participation| %>
-              <tr>
-                <td><%= participation.challenge.name %></td>
-                <td><%= Challenge.sports.key(participation.challenge.sport) %></td>
-                <td><%= Challenge.categories.key(participation.challenge.category) %></td>
-                <td><%= participation.challenge.start %></td>
-                <td><%= participation.challenge.stop %></td>
-                <td><%= participation.challenge.participations.count()%></td>
+                  <tr>
+                    <td><%= participation.challenge.name %></td>
+                    <td><%= Challenge.sports.key(participation.challenge.sport) %></td>
+                    <td><%= Challenge.categories.key(participation.challenge.category) %></td>
+                    <td><%= participation.challenge.start %></td>
+                    <td><%= participation.challenge.stop %></td>
+                    <td><%= participation.challenge.participations.count()%></td>
 
 
-              </tr>
-                  <% end %>
+                  </tr>
+              <% end %>
               </tbody>
             </table>
             <hr>
@@ -168,14 +158,14 @@
 
                 <div class="form-group">
                   <div class="col-xs-6">
-                    <label for="password"><h4>Password</h4></label>
+                    <label for="password"><h4>Password (required)</h4></label>
                     <%= f.password_field :password, :class => 'form-control', :placeholder => "Enter your new password" %>
                   </div>
                 </div>
 
                 <div class="form-group">
                   <div class="col-xs-6">
-                    <label for="password2"><h4>Verify</h4></label>
+                    <label for="password2"><h4>Verify (required)</h4></label>
                     <%= f.password_field :password_confirmation, :class => 'form-control', :placeholder => "Re-enter your new password" %>
                   </div>
                 </div>
@@ -183,7 +173,7 @@
                 <div class="form-group">
                   <div class="col-xs-12">
                     <br>
-                    <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                    <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i>Save</button>
                     <button class="btn btn-lg" href="#home"><i class="glyphicon glyphicon-remove"></i> Cancel</button>
                   </div>
                 </div>
@@ -195,3 +185,4 @@
     </div>
   </div>
 </div>
+
