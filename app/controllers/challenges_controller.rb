@@ -11,7 +11,17 @@ class ChallengesController < ApplicationController
   def index
     #@challenge = Challenge.all_cached
     #@stats = Rails.cache.stats.first.last
+    page = params[:page].blank? ? 1 : params[:page]
+    @result = Rails.cache.read(page)
+    if @result.blank?
+      flash[:notice] = "Added to cache"
+      @result = Challenge.paginate(:page => page, :per_page => 3).all
+      Rails.cache.write(page, @result)
+    else
+      flash[:notice] = "In cache"
+    end
     @challenge = Challenge.all
+
   end
 
   # GET /challenges/1
@@ -28,6 +38,7 @@ class ChallengesController < ApplicationController
   def new
     @challenge = Challenge.new
   end
+
 
   # GET /challenges/1/edit
   def edit
