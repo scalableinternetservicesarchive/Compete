@@ -1,5 +1,6 @@
 class ChallengesController < ApplicationController
   include Devise::Controllers::Helpers
+  helper_method :getResult
 
   before_filter :require_premisson, only: [:edit, :destroy]
   before_action :set_challenge, only: [:show, :edit, :update, :destroy]
@@ -11,18 +12,22 @@ class ChallengesController < ApplicationController
   def index
     #@challenge = Challenge.all_cached
     #@stats = Rails.cache.stats.first.last
-    page = params[:page].blank? ? 1 : params[:page]
-    @result = Rails.cache.read(page)
-    if @result.blank?
-      flash[:notice] = "Added to cache"
-      @result = Challenge.paginate(:page => page, :per_page => 50).all
-      Rails.cache.write(page, @result)
-    else
-      flash[:notice] = "In cache"
-    end
-    @challenge = Challenge.all
+      @challenge = Challenge.all
+
+      page = params[:page].blank? ? 1 : params[:page]
+      if params[:category].blank? && params[:sport].blank?
+        @result = Rails.cache.read(page)
+        if @result.blank?
+          @result = Challenge.paginate(:page => page, :per_page => 50).all
+          Rails.cache.write(page, @result)
+        end
+      elsif params[:sport].blank?
+        @result = Rails.cache.read()
+      end
+
 
   end
+
 
   # GET /challenges/1
   # GET /challenges/1.json

@@ -6,9 +6,9 @@ class Challenge < ActiveRecord::Base
   enum sports: [:Swimming, :Running]
   enum categories: [:Collaboration, :Competition]
   belongs_to :user
-  has_many :comments, :dependent => :delete_all
-  has_many :progresses, :dependent => :delete_all
-  has_many :participations, :dependent => :delete_all
+  has_many :comments, :dependent => :destroy
+  has_many :progresses, :dependent => :destroy
+  has_many :participations, :dependent => :destroy
   validates :name, presence: true
   validates_uniqueness_of :name
   validates_length_of :name,

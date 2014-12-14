@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+CONN = ActiveRecord::Base.connection
+TIMES = 10000
+
+TIMES.times {Challenge.create(:user_id => 1, :name => (0...8).map { (65 + rand(26)).chr }.join, :start => Date.today, :stop => Date.today)}
