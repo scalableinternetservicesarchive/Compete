@@ -2,18 +2,18 @@
 <% if((params[:sport] == nil || params[:sport].to_i < 0)  && (params[:category] == nil || params[:category].to_i < 0))
 
      #result = @challenges.all.find_each
-     result = Challenge.paginate(:page => params[:page], :per_page => 10)
+     result = Challenge.paginate(:page => params[:page], :per_page => 50)
 
    elsif(params[:sport].to_i < 0  && params[:category].to_i >= 0)
      #result = @challenges.where(:category => params[:category]).each
-     result = Challenge.paginate(:page => params[:page], :per_page => 10).where(:category => params[:category])
+     result = Challenge.paginate(:page => params[:page], :per_page => 50).where(:category => params[:category])
    elsif(params[:sport].to_i >= 0  && params[:category].to_i < 0)
      #result = @challenges.where(:sport => params[:sport]).each
-     result = Challenge.paginate(:page => params[:page], :per_page => 10).where(:sport => params[:sport])
+     result = Challenge.paginate(:page => params[:page], :per_page => 50).where(:sport => params[:sport])
 
    else
      #result = @challenges.where(:sport => params[:sport],:category => params[:category]).each
-     result = Challenge.paginate(:page => params[:page], :per_page => 10).where(:sport => params[:sport],:category => params[:category])
+     result = Challenge.paginate(:page => params[:page], :per_page => 50).where(:sport => params[:sport],:category => params[:category])
    end
 
 %>
