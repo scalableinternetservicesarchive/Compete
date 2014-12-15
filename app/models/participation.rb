@@ -3,7 +3,7 @@ class Participation < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :challenge
-  has_many :progresses
+  has_many :progresses, :dependent => :destroy
 
   validates :challenge, presence: true
   validates :user, presence: true

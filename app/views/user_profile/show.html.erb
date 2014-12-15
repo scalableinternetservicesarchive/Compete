@@ -35,7 +35,7 @@
       <ul class="list-group">
         <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Ongoing challenges</strong></span> <%= current_user.challenges.count() %></li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong>Completed challenges</strong></span> 3</li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Completed challenges</strong></span> <%= @user.participations.count()%></li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Some other stuff</strong></span> x</li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>More stuff</strong></span> x</li>
       </ul>
@@ -58,6 +58,7 @@
             <%= render :template => "activities/index" %>
 
             <hr>
+
             <div class="row">
               <div class="col-md-4 col-md-offset-4 text-center">
                 <ul class="pagination" id="myPager"></ul>
@@ -85,7 +86,7 @@
               <tbody id="items">
               <% current_user.participations.paginate(:page => params[:page], :per_page => 10).each do |participation| %>
                   <tr>
-                    <td><%= participation.challenge.name %></td>
+                    <td><%= link_to participation.challenge.name, participation.challenge %></td>
                     <td><%= Challenge.sports.key(participation.challenge.sport) %></td>
                     <td><%= Challenge.categories.key(participation.challenge.category) %></td>
                     <td><%= participation.challenge.start %></td>

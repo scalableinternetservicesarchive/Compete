@@ -1,4 +1,3 @@
-
 <div class="row">
     <ul class="thumbnails list-unstyled">
       <li class="col-md-8">
@@ -16,7 +15,7 @@
                <% end %>
 
             </div>
-            <div class="row" style="text-align: center">
+        <div class="row" style="text-align: center">
               <div class="col-md-3"><b> <%= Challenge.sports.key(@challenge.sport) %> </b><br/><small>SPORT</small></div>
               <div class="col-md-3"><b><%= Challenge.categories.key(@challenge.category) %></b><br/><small>CATEGORY</small></div>
               <div class="col-md-3"><b><%= @challenge.distance %></b><br/><small>DISTANCE</small></div>
@@ -27,7 +26,6 @@
       <!--<%= link_to 'Edit', edit_challenge_path(@challenge), class: 'btn btn-primary btn-xs' %>
       <%= link_to 'Back', challenges_path, class: 'btn btn-info btn-xs' %> -->
     </ul>
-
 
     <div class="col-md-4">
       <h3>Participations:</h3>
