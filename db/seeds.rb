@@ -10,7 +10,20 @@ TIMES = 1000
 
 #TIMES.times {Challenge.create(:user_id => 1, :name => (0...8).map { (65 + rand(26)).chr }.join, :start => Date.today, :stop => Date.today)}
 
-
+=begin
 ActiveRecord::Base.transaction do
   TIMES.times { Challenge.create(:user_id => 1, :name => (0...8).map { (65 + rand(26)).chr }.join, :start => Date.today, :stop => Date.today) }
+end
+=end
+
+ActiveRecord::Base.transaction do
+  TIMES.times {Comment.create(:message => "This is a comment for loadtesting This is a comment for loadtesting This is a comment for loadtesting This is a comment for loadtesting This is a comment for loadtesting This is a comment for loadtesting " ,:challenge_id => 1, :user_id => 1)}
+end
+
+ActiveRecord::Base.transaction do
+  Participation.create(:user_id => 1, :challenge_id => 1)
+end
+
+ActiveRecord::Base.transaction do
+  TIMES.times {Progress.create(:challenge_id => 1, :user_id => 1, :participation_id => 1)}
 end

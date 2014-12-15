@@ -45,8 +45,11 @@
       <ul class="nav nav-tabs" id="myTab">
         <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
         <li><a href="#challenges" data-toggle="tab">Challenges</a></li>
+        <% if @user == current_user %>
         <li><a href="#messages" data-toggle="tab">Messages</a></li>
+
         <li><a href="#settings" data-toggle="tab">Settings</a></li>
+            <% end %>
       </ul>
 
       <!--/begin home-->
@@ -123,6 +126,7 @@
         </div><!--/end messages-->
 
         <!--begin settings-->
+        <% if @user == current_user %>
         <div class="tab-pane" id="settings">
           <hr>
           <%= form_for(@user, :url => {:action => 'update', :id => @user.id}) do |f| %>
@@ -179,7 +183,8 @@
                 </div>
               </form>
               </div>
-          <% end %>
+          <% end
+          end %>
           </div>
       <!--/end settings-->
     </div>
