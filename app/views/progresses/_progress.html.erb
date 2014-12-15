@@ -10,10 +10,10 @@ end%>
 <div class="well well-sm">
     <div>
         <% if @challenge.sport == 0 %>
-          <strong><%= progress.user.email if progress.user %></strong>
+          <strong><%= progress.user.name if progress.user %></strong>
           swam <%= progress.gain %> meters!
         <% else @challenge.sport == 1 %>
-          <strong><%= progress.user.email if progress.user %></strong>
+          <strong><%= progress.user.name if progress.user %></strong>
           ran <%= progress.gain %> meters!
           <% end %>
     </div>
