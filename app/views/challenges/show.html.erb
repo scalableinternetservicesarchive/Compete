@@ -54,7 +54,7 @@
 	<div class="col-md-4">
 		<h3>Comments</h3>
 
-        <% commentres = @challenge.comments.paginate(:page => params[:page], :per_page => 2).all
+        <% commentres = @challenge.comments.paginate(:page => params[:page], :per_page => 50).all
            commentres.each do |comment|%>
           <% if comment.user == current_user %>
               <%= link_to edit_comment_path(comment, :challenge_id => @challenge.id), class: 'btn btn-xs' do %>
@@ -88,7 +88,7 @@
 
 	<div class="col-md-4">
 		<h3>Progresses</h3>
-      <% progressres = @challenge.progresses.paginate(:page => params[:page], :per_page => 2).all
+      <% progressres = @challenge.progresses.paginate(:page => params[:page], :per_page => 50).all
          progressres.each do |progress|%>
           <% if progress.user == current_user %>
               <%= link_to edit_progress_path(progress, :challenge_id => @challenge.id), class: 'btn btn-xs' do %>
@@ -108,8 +108,20 @@
                   ran <%= progress.gain %> meters!
               <% end
               end%>
+
+            </div>
+          </div>
+
+
+
+
+
+      <% if @challenge.participations.find_by(:user_id => current_user.id) %>
+		<%= link_to 'Add Progress', new_progress_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>
+          <% end %>
+
       <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-3">
+        <div class="col-xs-12 col-sm-12 col-md-4">
           <div class="digg_pagination">
             <div class="page_info">
               <%= page_entries_info progressres %>
@@ -118,12 +130,8 @@
           </div>
         </div>
       </div>
-            </div>
 
-          </div>
-
-      <% if @challenge.participations.find_by(:user_id => current_user.id) %>
-		<%= link_to 'Add Progress', new_progress_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>
-          <% end %>
 	</div>
+
+
 </div>
