@@ -17,11 +17,9 @@ class ChallengesController < ApplicationController
       page = params[:page].blank? ? 1 : params[:page]
       @result = Rails.cache.read(page)
       if @result.blank?
-        flash[:notice] = "Added to cache"
-        @result = Challenge.paginate(:page => page, :per_page => 3).all
+        @result = Challenge.paginate(:page => page, :per_page => 50).all
         Rails.cache.write(page, @result)
       else
-        flash[:notice] = "In cache"
       end
       @challenge = Challenge.all
 
