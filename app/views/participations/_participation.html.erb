@@ -1,10 +1,11 @@
 <div class="well well-sm">
   <div>
 
-        <strong><%= participation.user.email %></strong>
+        <strong><%= participation.user.name if participation.user %></strong>
 
 
-    <% if participation.challenge.distance.present? && participation.challenge.distance > participation.total_gain && participation.total_gain > 0
+    <% if participation.challenge.distance.present?
+         if participation.challenge.distance > participation.total_gain && participation.total_gain > 0
          current_gain = ( participation.total_gain.to_f/participation.challenge.distance.to_f) * 100 %>
         <div class="progress">
           <div class="progress-bar" role="progressbar" aria-valuenow="<%= participation.total_gain %>" aria-valuemin="0"
@@ -12,7 +13,7 @@
             <%= participation.total_gain %> meters
           </div>
         </div>
-       <% elsif  participation.challenge.distance.present? && participation.total_gain > participation.challenge.distance %>
+       <% elsif participation.total_gain > participation.challenge.distance %>
         <div class="progress">
           <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0"
         aria-valuemax="100" style="width:100%">
@@ -21,7 +22,9 @@
         </div>
         <% else %>
            <br> Add a progress to see a progress bar!
-        <% end %>
-
+        <% end
+       else%>
+    Tell the owner to add a distance to the challenge!
+    <% end %>
   </div>
 </div>
