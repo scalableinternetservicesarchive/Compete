@@ -14,14 +14,15 @@ class ChallengesController < ApplicationController
     #@stats = Rails.cache.stats.first.last
       @challenge = Challenge.all
 
+=begin
       page = params[:page].blank? ? 1 : params[:page]
       @result = Rails.cache.read(page)
       if @result.blank?
         @result = Challenge.paginate(:page => page, :per_page => 50).all
         Rails.cache.write(page, @result)
-      else
       end
       @challenge = Challenge.all
+=end
 
 
 

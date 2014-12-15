@@ -35,30 +35,25 @@
 
   </hgroup>
   <%
-     if((params[:sport] == nil || params[:sport].to_i < 0)  && (params[:category] == nil || params[:category].to_i < 0))
 
-       #result = @challenges.all.find_each
-       result = @result
-     elsif(params[:sport].to_i < 0  && params[:category].to_i >= 0)
-       #result = @challenges.where(:category => params[:category]).each
-       result = Challenge.paginate(:page => params[:page], :per_page => 50).where(:category => params[:category])
-     elsif(params[:sport].to_i >= 0  && params[:category].to_i < 0)
-       #result = @challenges.where(:sport => params[:sport]).each
-       result = Challenge.paginate(:page => params[:page], :per_page => 50).where(:sport => params[:sport])
-
-     else
-       #result = @challenges.where(:sport => params[:sport],:category => params[:category]).each
-       result = Challenge.paginate(:page => params[:page], :per_page => 50).where(:sport => params[:sport],:category => params[:category])
-     end
   %>
 
 
+    <% cache(cache_key_for_challenges) do %>
 
+      <% if((params[:sport] == nil || params[:sport].to_i < 0)  && (params[:category] == nil || params[:category].to_i < 0))
+            result = Challenge.paginate(:page => params[:page], :per_page => 50).all %>
+      <% elsif(params[:sport].to_i < 0  && params[:category].to_i >= 0)
+        result = Challenges.where(:category => params[:category]).all
+      elsif(params[:sport].to_i >= 0  && params[:category].to_i < 0)
+      #result = @challenges.where(:sport => params[:sport]).each
+        result = Challenge.paginate(:page => params[:page], :per_page => 50).where(:sport => params[:sport]).all
 
-
-    <% result.each do |challenge| %>
-
-
+      else
+      #result = @challenges.where(:sport => params[:sport],:category => params[:category]).each
+      result = Challenge.paginate(:page => params[:page], :per_page => 50).where(:sport => params[:sport],:category => params[:category]).all
+      end %>
+      <% result.each do |challenge| %>
 
       <section class="col-xs-12 col-sm-6 col-md-12">
         <article class="search-result row">
@@ -96,8 +91,10 @@
           <span class="clearfix borda"></span>
         </article>
       </section>
+    <%end %>
 
-    <% end %>
+
+
 
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-3">
@@ -109,6 +106,7 @@
       </div>
     </div>
   </div>
+  <% end %>
 
   </div>
 
