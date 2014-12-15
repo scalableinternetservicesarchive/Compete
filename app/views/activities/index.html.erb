@@ -1,8 +1,19 @@
 
   <div class="timeline-centered col-md-8">
 
-<%  PublicActivity::Activity.paginate(:page => params[:page], :per_page => 20).order("created_at desc").each do |activity| %>
+<%  result = PublicActivity::Activity.paginate(:page => params[:page], :per_page => 20).order("created_at desc").all
+    result.each do |activity| %>
     <%= render_activity activity %>
 <% end %>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-3">
+        <div class="digg_pagination">
+          <div class="page_info">
+            <%= page_entries_info result %>
+          </div>
+          <%= will_paginate result, :container => false %>
+        </div>
+      </div>
+    </div>
 
   </div>

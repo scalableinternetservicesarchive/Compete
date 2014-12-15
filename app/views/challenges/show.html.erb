@@ -49,17 +49,79 @@
 </div>
 
 <div class="row">
-	<div class="col-md-4">
-		<h3>Comments</h3>
-		<%= render @challenge.root_comments %>
-		<%= link_to 'Add Comment', new_comment_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>
-	</div>
+  <div class="col-md-4">
+    <h3>Comments</h3>
 
-	<div class="col-md-4">
-		<h3>Progresses</h3>
-		<%= render @challenge.root_progresses %>
-      <% if @challenge.participations.find_by(:user_id => current_user.id) %>
-		<%= link_to 'Add Progress', new_progress_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>
-          <% end %>
-	</div>
+    <% commentres = @challenge.comments.paginate(:page => params[:page], :per_page => 30).all
+       commentres.each do |comment|%>
+        <% if comment.user == current_user %>
+            <%= link_to edit_comment_path(comment, :challenge_id => @challenge.id), class: 'btn btn-xs' do %>
+                <i class="glyphicon glyphicon-edit"></i>
+            <% end %>
+            <%= link_to comment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs' do %>
+                <i class="glyphicon glyphicon-remove"></i>
+            <% end
+               end
+            %>
+
+        <div class="well well-sm">
+          <div>
+            <strong><%= comment.user.email if comment.user %> wrote: </strong><br>
+            <%= comment.message %>
+          </div>
+        </div>
+    <%end%>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-3">
+        <div class="digg_pagination">
+          <div class="page_info">
+            <%= page_entries_info commentres %>
+          </div>
+          <%= will_paginate commentres, :container => false %>
+        </div>
+      </div>
+    </div>
+    <%= link_to 'Add Comment', new_comment_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>
+  </div>
+
+  <div class="col-md-4">
+    <h3>Progresses</h3>
+    <% progressres = @challenge.progresses.paginate(:page => params[:page], :per_page => 30).all
+       progressres.each do |progress|%>
+        <% if progress.user == current_user %>
+            <%= link_to edit_progress_path(progress, :challenge_id => @challenge.id), class: 'btn btn-xs' do %>
+                <i class="glyphicon glyphicon-edit"></i>
+            <% end %>
+            <%= link_to progress, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs' do %>
+                <i class="glyphicon glyphicon-remove"></i>
+            <% end
+               end%>
+        <div class="well well-sm">
+          <div>
+            <% if @challenge.sport == 0 %>
+                <strong><%= progress.user.name if progress.user %></strong>
+                swam <%= progress.gain %> meters!
+            <% else @challenge.sport == 1 %>
+                <strong><%= progress.user.name if progress.user %></strong>
+                ran <%= progress.gain %> meters!
+            <% end %>
+          </div>
+        </div>
+    <%end%>
+    <% if @challenge.participations.find_by(:user_id => current_user.id) %>
+        <%= link_to 'Add Progress', new_progress_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>
+    <% end %>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-4">
+        <div class="digg_pagination">
+          <div class="page_info">
+            <%= page_entries_info progressres %>
+          </div>
+          <%= will_paginate progressres, :container => false %>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
