@@ -106,19 +106,13 @@
               <% else @challenge.sport == 1 %>
                   <strong><%= progress.user.name if progress.user %></strong>
                   ran <%= progress.gain %> meters!
-              <% end
-              end%>
-
+              <% end %>
             </div>
           </div>
-
-
-
-
-
+            <%end%>
       <% if @challenge.participations.find_by(:user_id => current_user.id) %>
-		<%= link_to 'Add Progress', new_progress_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>
-          <% end %>
+          <%= link_to 'Add Progress', new_progress_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>
+      <% end %>
 
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-4">
@@ -131,7 +125,8 @@
         </div>
       </div>
 
-	</div>
+    </div>
+          </div>
 
 
 </div>
