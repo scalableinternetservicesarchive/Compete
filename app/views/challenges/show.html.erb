@@ -5,7 +5,7 @@
           <div class="caption" style="padding-left:15px">
             <h3><%= @challenge.name %></h3>
             <p><%= @challenge.description %></p>
-            <p>Owner: <%= @challenge.user.email if @challenge.user%></p>
+            <p>Owner: <%= @challenge.user.name if @challenge.user%></p>
           </div>
           <div class="modal-footer" style="text-align: left">
             <% if @challenge.category == 0 %>
@@ -66,7 +66,7 @@
 
         <div class="well well-sm">
           <div>
-            <strong><%= comment.user.email if comment.user %> wrote: </strong><br>
+            <strong><%= comment.user.name if comment.user %> wrote: </strong><br>
             <%= comment.message %>
           </div>
         </div>
@@ -108,9 +108,7 @@
           </div>
         </div>
     <%end%>
-    <% if @challenge.participations.find_by(:user_id => current_user.id) %>
-        <%= link_to 'Add Progress', new_progress_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>
-    <% end %>
+
 
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-4">
@@ -122,6 +120,9 @@
         </div>
       </div>
     </div>
+    <% if @challenge.participations.find_by(:user_id => current_user.id) %>
+        <%= link_to 'Add Progress', new_progress_path(:challenge_id => @challenge.id), class: 'btn btn-primary btn-xs' %>
+    <% end %>
 
   </div>
 </div>
